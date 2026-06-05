@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 // ─── Step indicator ───────────────────────────────────────────────────────────
 function Steps({ current }) {
@@ -809,9 +810,16 @@ export default function ForgotPasswordPage() {
                 color: "white",
                 fontWeight: "800",
                 fontFamily: "Syne, sans-serif",
+                position: "relative",
               }}
             >
-              SF
+              <Image
+                src="/schoolflow-logo.png"
+                alt="SchoolFlow"
+                width={52}
+                height={52}
+                className="nav-logo-img"
+              />
             </div>
             <div style={{ textAlign: "left" }}>
               <p
@@ -824,7 +832,7 @@ export default function ForgotPasswordPage() {
                   lineHeight: 1.1,
                 }}
               >
-                SchoolFlow
+                SchoolFlow-GN
               </p>
               <p style={{ margin: 0, color: "#475569", fontSize: "10px" }}>
                 by G-Tech Academy

@@ -2,9 +2,6 @@
 import { useState } from "react";
 import { useFetch, useApi } from "@/hooks";
 import { Button, Card, Badge, LoadingPage } from "@/components/ui";
-import { SUBSCRIPTION_PLANS } from "@/services/paymentService";
-
-// client-side plan definitions (mirrored from service)
 const PLANS = [
   {
     key: "FREE",
@@ -73,7 +70,7 @@ function formatGNF(v) {
 
 export default function BillingPage() {
   const [toast, setToast] = useState(null);
-  const { data: subData, loading } = useFetch("/api/payments/subscription");
+  const { data: subData, loading } = useFetch("/payments/subscription");
   const { post, loading: upgrading } = useApi();
 
   const notify = (msg, type = "success") => {
@@ -83,7 +80,7 @@ export default function BillingPage() {
 
   async function handleUpgrade(plan) {
     try {
-      const result = await post("/api/payments", {
+      const result = await post("/payments", {
         amount: PLANS.find((p) => p.key === plan)?.price || 0,
         paymentType: "SUBSCRIPTION",
         description: `SchoolFlow ${plan} Plan – Annual`,

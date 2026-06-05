@@ -1,5 +1,11 @@
-import "server-only";
+import "server-only"; // Ensure this module is only used in server context
 import twilio from "twilio";
+
+if (typeof window !== "undefined") {
+  throw new Error(
+    "[whatsappService] Ce module ne peut s'exécuter que côté serveur.",
+  );
+}
 
 // ─── Twilio Client (lazy init) ────────────────────────────────────────────────
 let client = null;
@@ -262,7 +268,7 @@ export async function sendExamReminder({
     year: "numeric",
   });
 
-  const message = `📅 *Examen Planifié — SchoolFlow*
+  const message = `📅 *Examen Planifié — SchoolFlow-GN*
 
 Bonjour *${studentName}*,
 
@@ -320,7 +326,7 @@ export async function sendSubscriptionReminder({
     year: "numeric",
   });
 
-  const message = `⚠️ *Rappel Abonnement — SchoolFlow*
+  const message = `⚠️ *Rappel Abonnement — SchoolFlow-GN*
 
 Bonjour *${adminName}*,
 
@@ -334,7 +340,7 @@ Pour renouveler votre abonnement :
 💬 *Besoin d'aide ?*
 wa.me/224623952011
 
-*SchoolFlow by G-Tech Academy*`;
+*SchoolFlow-GN by G-Tech Academy*`;
 
   return sendWhatsApp(phone, message);
 }

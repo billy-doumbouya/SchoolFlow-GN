@@ -1,4 +1,5 @@
 "use client";
+import { forwardRef } from "react";
 // ─── SchoolFlow Dark Design System ───────────────────────────────────────────
 // All components follow the brand: #0f1623 bg, Syne titles, DM Sans body
 // Blue→Violet gradient for primary actions
@@ -251,7 +252,12 @@ export function Badge({ variant = "default", children, style }) {
 }
 
 // ─── Input ────────────────────────────────────────────────────────────────────
-export function Input({ label, error, required, style, ...props }) {
+// ✅ CORRECT
+
+export const Input = forwardRef(function Input(
+  { label, error, required, style, ...props },
+  ref,
+) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
       {label && (
@@ -271,6 +277,7 @@ export function Input({ label, error, required, style, ...props }) {
         </label>
       )}
       <input
+        ref={ref} // ← ajout du ref ici
         style={{
           height: "40px",
           background: T.bgInput,
@@ -301,10 +308,13 @@ export function Input({ label, error, required, style, ...props }) {
       )}
     </div>
   );
-}
+});
 
 // ─── Select ───────────────────────────────────────────────────────────────────
-export function Select({ label, error, required, children, style, ...props }) {
+export const Select = forwardRef(function Select(
+  { label, error, required, children, style, ...props },
+  ref,
+) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
       {label && (
@@ -324,6 +334,7 @@ export function Select({ label, error, required, children, style, ...props }) {
         </label>
       )}
       <select
+        ref={ref} // ← ajout du ref ici
         style={{
           height: "40px",
           background: "#131c2e",
@@ -355,10 +366,12 @@ export function Select({ label, error, required, children, style, ...props }) {
       )}
     </div>
   );
-}
-
+});
 // ─── Textarea ─────────────────────────────────────────────────────────────────
-export function Textarea({ label, error, style, ...props }) {
+export const Textarea = forwardRef(function Textarea(
+  { label, error, style, ...props },
+  ref,
+) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
       {label && (
@@ -375,6 +388,7 @@ export function Textarea({ label, error, style, ...props }) {
         </label>
       )}
       <textarea
+        ref={ref}
         style={{
           minHeight: "80px",
           background: T.bgInput,
@@ -404,7 +418,7 @@ export function Textarea({ label, error, style, ...props }) {
       )}
     </div>
   );
-}
+});
 
 // ─── Table ────────────────────────────────────────────────────────────────────
 export function Table({ children }) {

@@ -37,8 +37,13 @@ const ROLE_RESTRICTED = {
 };
 
 function isPublicRoute(pathname) {
+  // Fichiers statiques (public/)
+  if (/\.(png|jpg|jpeg|svg|gif|webp|ico|css|js|woff2?)$/i.test(pathname)) {
+    return true;
+  }
+
   return PUBLIC_ROUTES.some((route) => {
-    if (route === "/") return pathname === "/"; // exact match uniquement
+    if (route === "/") return pathname === "/";
     return pathname.startsWith(route);
   });
 }
@@ -122,5 +127,7 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|public).*)"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.png$|.*\\.jpg$|.*\\.jpeg$|.*\\.svg$|.*\\.gif$|.*\\.webp$|.*\\.ico$|.*\\.css$|.*\\.js$).*)",
+  ],
 };

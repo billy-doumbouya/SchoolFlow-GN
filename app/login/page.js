@@ -5,6 +5,7 @@ import { loginSchema } from "@/schemas";
 import { useState } from "react";
 import Link from "next/link";
 import { toast } from "sonner";
+import Image from "next/image";
 
 const BG = "#0a0f1e";
 const CARD = "#0f1623";
@@ -159,7 +160,7 @@ export default function LoginPage() {
                 lineHeight: 1.1,
               }}
             >
-              SchoolFlow
+              SchoolFlow-GN
             </p>
             <p style={{ margin: 0, color: "#475569", fontSize: "11px" }}>
               by G-Tech Academy
@@ -256,7 +257,8 @@ export default function LoginPage() {
             color: "#334155",
           }}
         >
-          © 2024 SchoolFlow by G-Tech Academy
+          &copy; {new Date().getFullYear()} SchoolFlow by G-Tech Academy. Tous
+          droits réservés.
         </p>
       </div>
 
@@ -303,7 +305,13 @@ export default function LoginPage() {
                 fontFamily: "Syne, sans-serif",
               }}
             >
-              SF
+              <Image
+                src="/schoolflow-logo.png"
+                alt="SchoolFlow"
+                width={28}
+                height={28}
+                className="nav-logo-img"
+              />
             </div>
             <span
               style={{
@@ -313,7 +321,7 @@ export default function LoginPage() {
                 fontFamily: "Syne, sans-serif",
               }}
             >
-              SchoolFlow
+              SchoolFlow-GN
             </span>
           </div>
 

@@ -8,22 +8,22 @@ export const metadata = {
     template: "%s | SchoolFlow",
   },
   description:
-    "SchoolFlow digitalise la gestion de votre établissement scolaire en Guinée. Élèves, enseignants, notes, paiements — tout en un. Créé par G-Tech Academy.",
+    "SchoolFlow-GN digitalise la gestion de votre établissement scolaire en Guinée. Élèves, enseignants, notes, paiements — tout en un. Créé par G-Tech Academy.",
   keywords: [
     "gestion scolaire",
     "école",
     "Guinée",
     "élèves",
     "enseignants",
-    "SchoolFlow",
+    "SchoolFlow-GN",
   ],
   authors: [{ name: "G-Tech Academy" }],
   openGraph: {
     type: "website",
     locale: "fr_GN",
     url: process.env.NEXT_PUBLIC_APP_URL || "https://schoolflow.gn",
-    siteName: "SchoolFlow",
-    title: "SchoolFlow — Plateforme Intelligente de Gestion Scolaire",
+    siteName: "SchoolFlow-GN",
+    title: "SchoolFlow-GN — Plateforme Intelligente de Gestion Scolaire",
     description:
       "Gérez votre école en toute simplicité. Paiements Mobile Money intégrés.",
     images: [
@@ -31,13 +31,13 @@ export const metadata = {
         url: "/schoolflow-logo.png",
         width: 1200,
         height: 630,
-        alt: "SchoolFlow",
+        alt: "SchoolFlow-GN",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "SchoolFlow — Gestion Scolaire en Guinée",
+    title: "SchoolFlow-GN — Gestion Scolaire en Guinée",
     images: ["/schoolflow-logo.png"],
   },
   icons: {

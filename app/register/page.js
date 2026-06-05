@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchoolSchema } from "@/schemas";
 import { toast } from "sonner";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function RegisterPage() {
   const {
@@ -82,7 +83,12 @@ export default function RegisterPage() {
               fontFamily: "Syne, sans-serif",
             }}
           >
-            SF
+            <Image
+              src="/schoolflow-logo.png"
+              alt="SchoolFlow"
+              width={20}
+              height={20}
+            />
           </div>
           <div>
             <p
@@ -95,7 +101,7 @@ export default function RegisterPage() {
                 lineHeight: 1.1,
               }}
             >
-              SchoolFlow
+              SchoolFlow-GN
             </p>
             <p style={{ margin: 0, color: "#475569", fontSize: "10px" }}>
               by G-Tech Academy

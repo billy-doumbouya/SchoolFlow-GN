@@ -29,10 +29,10 @@ async function main() {
 
   // ─── Super Admin ───────────────────────────────────────────────────────────
   const superAdminEmail = 'superadmin@schoolflow.gn'
-  let superAdminTenant  = await prisma.tenant.findUnique({ where: { slug: 'schoolflow-platform' } })
+  let superAdminTenant  = await prisma.tenant.findUnique({ where: { slug: 'schoolflow-gn-platform' } })
   if (!superAdminTenant) {
     superAdminTenant = await prisma.tenant.create({
-      data: { name: 'SchoolFlow Platform', slug: 'schoolflow-platform', email: 'platform@schoolflow.gn' },
+      data: { name: 'SchoolFlow-GN Platform', slug: 'schoolflow-platform', email: 'platform@schoolflow.gn' },
     })
   }
 

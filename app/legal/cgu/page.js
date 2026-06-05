@@ -82,7 +82,7 @@ export default function CGUPage() {
               fontFamily: "Syne, sans-serif",
             }}
           >
-            SchoolFlow
+            SchoolFlow-GN
           </span>
         </Link>
         <Link

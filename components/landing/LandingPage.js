@@ -150,7 +150,7 @@ function Hero() {
 
         {/* Subtitle */}
         <p className="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
-          SchoolFlow digitalise entièrement votre établissement scolaire —
+          SchoolFlow-GN digitalise entièrement votre établissement scolaire —
           élèves, enseignants, classes, notes et paiements — sur une seule
           plateforme sécurisée, conçue pour la Guinée.
         </p>
@@ -498,7 +498,7 @@ function HowItWorks() {
           <h2 className="section-title">Démarrez en 3 étapes</h2>
           <p className="section-subtitle">
             Aucune compétence technique requise. Si vous savez utiliser
-            WhatsApp, vous pouvez gérer SchoolFlow.
+            WhatsApp, vous pouvez gérer SchoolFlow-GN.
           </p>
         </div>
 
@@ -774,8 +774,8 @@ function FAQ() {
 
   const faqs = [
     {
-      q: "Est-ce que SchoolFlow fonctionne sans connexion internet rapide ?",
-      a: "Oui. SchoolFlow est optimisé pour les connexions lentes courantes en Guinée. Les pages sont légères et chargent rapidement même sur réseau 3G. Nous travaillons également sur un mode hors-ligne.",
+      q: "Est-ce que SchoolFlow-GN fonctionne sans connexion internet rapide ?",
+      a: "Oui. SchoolFlow-GN est optimisé pour les connexions lentes courantes en Guinée. Les pages sont légères et chargent rapidement même sur réseau 3G. Nous travaillons également sur un mode hors-ligne.",
     },
     {
       q: "Comment fonctionne le paiement des frais de scolarité ?",
@@ -791,7 +791,7 @@ function FAQ() {
     },
     {
       q: "Y a-t-il une application mobile ?",
-      a: "SchoolFlow est une application web responsive — elle fonctionne parfaitement sur téléphone, tablette et ordinateur sans rien installer. Une application Android native est en développement pour 2025.",
+      a: "SchoolFlow-GN est une application web responsive — elle fonctionne parfaitement sur téléphone, tablette et ordinateur sans rien installer. Une application Android native est en développement pour 2025.",
     },
     {
       q: "Que se passe-t-il quand notre plan gratuit arrive à la limite de 50 élèves ?",
@@ -863,7 +863,7 @@ function CTAFinal() {
         <div data-aos="zoom-in">
           <h2 className="cta-title">Prêt à digitaliser votre école ?</h2>
           <p className="cta-subtitle">
-            Rejoignez les 120+ établissements qui font confiance à SchoolFlow.
+            Rejoignez les 120+ établissements qui font confiance à SchoolFlow-GN.
             Démarrez gratuitement — aucune carte bancaire requise.
           </p>
           <div className="cta-buttons">
@@ -871,7 +871,7 @@ function CTAFinal() {
               Créer mon compte gratuitement
             </Link>
             <a
-              href={`https://wa.me/224623952011?text=Bonjour, je veux en savoir plus sur SchoolFlow`}
+              href={`https://wa.me/224623952011?text=Bonjour, je veux en savoir plus sur SchoolFlow-GN`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-whatsapp"
@@ -904,7 +904,7 @@ function Footer() {
                 height={52}
               />
               <div>
-                <p className="footer-logo-name">SchoolFlow</p>
+                <p className="footer-logo-name">SchoolFlow-GN</p>
                 <p className="footer-logo-sub">
                   Smart School Management Platform
                 </p>
@@ -989,7 +989,7 @@ function Footer() {
           <div className="footer-bottom-left">
             <p>
               {" "}
-              &copy; {new Date().getFullYear()} SchoolFlow. Tous droits
+              &copy; {new Date().getFullYear()} SchoolFlow-GN. Tous droits
               réservés.
             </p>
           </div>

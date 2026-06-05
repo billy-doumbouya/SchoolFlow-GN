@@ -64,7 +64,7 @@ export default function PrivacyPage() {
               fontFamily: "Syne, sans-serif",
             }}
           >
-            SchoolFlow
+            SchoolFlow-GN
           </span>
         </Link>
         <Link
