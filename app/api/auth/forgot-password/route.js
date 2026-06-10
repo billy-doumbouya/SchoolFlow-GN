@@ -1,8 +1,8 @@
+export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 import { requestPasswordReset } from "@/services/otpService";
 import { errorResponse } from "@/lib/api";
 import { otpRateLimit, getClientIP } from "@/lib/rateLimiter";
-
 export async function POST(request) {
   try {
     const body = await request.json();
