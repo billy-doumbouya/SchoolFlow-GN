@@ -3,7 +3,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/components/ui";
 import { NotificationBell } from "@/components/layout/NotificationBell";
-import Image from "next/image";
 
 const NAV_ITEMS = {
   SCHOOL_ADMIN: [
@@ -31,6 +30,7 @@ const NAV_ITEMS = {
     },
   ],
   SUPER_ADMIN: [
+    { label: "Plateforme", href: "/dashboard/super", icon: "building" },
     { label: "Vue générale", href: "/dashboard/admin", icon: "grid" },
     { label: "Écoles", href: "/dashboard/admin/schools", icon: "building" },
     { label: "Élèves", href: "/dashboard/admin/students", icon: "users" },
@@ -258,13 +258,7 @@ export function Sidebar({ user, tenant }) {
               flexShrink: 0,
             }}
           >
-            <Image
-              src="/schoolflow-logo.png"
-              alt="SchoolFlow"
-              width={28}
-              height={28}
-              className="nav-logo-img"
-            />
+            SF
           </div>
           <div style={{ minWidth: 0 }}>
             <p

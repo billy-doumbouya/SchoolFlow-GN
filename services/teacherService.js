@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import { hashPassword } from '@/lib/auth'
+import { getPlanByKey } from '@/lib/pricing'
 import { sendTeacherWelcome } from '@/services/whatsappService'
 import { generateTempPassword } from '@/lib/passwordGen'
 import { AppError, NotFoundError, getPagination, buildPaginationMeta } from '@/lib/api'
@@ -61,6 +62,21 @@ export async function getTeacher(tenantId, teacherId) {
 }
 
 export async function createTeacher(tenantId, data) {
+  // ── Quota enforcement ──────────────────────────────────────────────────────
+  const [teacherCount, subscription] = await Promise.all([
+    prisma.teacher.count({ where: { tenantId, isActive: true } }),
+    prisma.subscription.findFirst({ where: { tenantId, status: 'ACTIVE' }, orderBy: { createdAt: 'desc' } }),
+  ])
+  const plan  = getPlanByKey(subscription?.plan || 'FREE')
+  const limit = subscription?.maxTeachers || plan.maxTeachers
+  if (teacherCount >= limit) {
+    throw new AppError(
+      `Quota atteint — votre plan ${plan.label} est limité à ${limit} enseignants actifs. Upgradez votre abonnement.`,
+      403
+    )
+  }
+  // ──────────────────────────────────────────────────────────────────────────
+
   const { email, password, firstName, lastName, qualification, specialization } = data
 
   const existingUser = await prisma.user.findFirst({ where: { tenantId, email } })

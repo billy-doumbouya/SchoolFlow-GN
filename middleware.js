@@ -22,7 +22,7 @@ const PUBLIC_ROUTES = [
 
 // Role → allowed dashboard prefix
 const ROLE_HOME = {
-  SUPER_ADMIN: "/dashboard/admin",
+  SUPER_ADMIN: "/dashboard/super",
   SCHOOL_ADMIN: "/dashboard/admin",
   TEACHER: "/dashboard/teacher",
   STUDENT: "/dashboard/student",
@@ -37,15 +37,7 @@ const ROLE_RESTRICTED = {
 };
 
 function isPublicRoute(pathname) {
-  // Fichiers statiques (public/)
-  if (/\.(png|jpg|jpeg|svg|gif|webp|ico|css|js|woff2?)$/i.test(pathname)) {
-    return true;
-  }
-
-  return PUBLIC_ROUTES.some((route) => {
-    if (route === "/") return pathname === "/";
-    return pathname.startsWith(route);
-  });
+  return PUBLIC_ROUTES.some((route) => pathname.startsWith(route));
 }
 
 function getTokenFromCookies(request) {
@@ -70,11 +62,6 @@ export async function middleware(request) {
     return NextResponse.next();
   }
 
-  // Root redirect
-  if (pathname === "/") {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
-
   // Get token
   const token = getTokenFromCookies(request);
   if (!token) {
@@ -94,7 +81,8 @@ export async function middleware(request) {
     pathname.startsWith("/dashboard/profile") ||
     pathname.startsWith("/dashboard/notifications") ||
     pathname.startsWith("/api/school") ||
-    pathname.startsWith("/api/upload")
+    pathname.startsWith("/api/upload") ||
+    pathname.startsWith("/api/super")
   ) {
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set("x-user-id", payload.sub);
@@ -127,7 +115,5 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.png$|.*\\.jpg$|.*\\.jpeg$|.*\\.svg$|.*\\.gif$|.*\\.webp$|.*\\.ico$|.*\\.css$|.*\\.js$).*)",
-  ],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|public).*)"],
 };

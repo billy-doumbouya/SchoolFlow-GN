@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Chatbot from "./Chatbot";
 
 // ─── AOS Init ─────────────────────────────────────────────────────────────────
 function useAOS() {
@@ -76,6 +77,18 @@ function Navbar() {
 
         {/* CTA */}
         <div className="nav-cta">
+          <a
+            href="https://wa.me/224623952011?text=Bonjour, je veux en savoir plus sur SchoolFlow"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-ghost-nav"
+            style={{ display: "flex", alignItems: "center", gap: "6px" }}
+          >
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            Nous contacter
+          </a>
           <Link href="/login" className="btn-ghost-nav">
             Se connecter
           </Link>
@@ -150,7 +163,7 @@ function Hero() {
 
         {/* Subtitle */}
         <p className="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
-          SchoolFlow-GN digitalise entièrement votre établissement scolaire —
+          SchoolFlow digitalise entièrement votre établissement scolaire —
           élèves, enseignants, classes, notes et paiements — sur une seule
           plateforme sécurisée, conçue pour la Guinée.
         </p>
@@ -498,7 +511,7 @@ function HowItWorks() {
           <h2 className="section-title">Démarrez en 3 étapes</h2>
           <p className="section-subtitle">
             Aucune compétence technique requise. Si vous savez utiliser
-            WhatsApp, vous pouvez gérer SchoolFlow-GN.
+            WhatsApp, vous pouvez gérer SchoolFlow.
           </p>
         </div>
 
@@ -774,8 +787,8 @@ function FAQ() {
 
   const faqs = [
     {
-      q: "Est-ce que SchoolFlow-GN fonctionne sans connexion internet rapide ?",
-      a: "Oui. SchoolFlow-GN est optimisé pour les connexions lentes courantes en Guinée. Les pages sont légères et chargent rapidement même sur réseau 3G. Nous travaillons également sur un mode hors-ligne.",
+      q: "Est-ce que SchoolFlow fonctionne sans connexion internet rapide ?",
+      a: "Oui. SchoolFlow est optimisé pour les connexions lentes courantes en Guinée. Les pages sont légères et chargent rapidement même sur réseau 3G. Nous travaillons également sur un mode hors-ligne.",
     },
     {
       q: "Comment fonctionne le paiement des frais de scolarité ?",
@@ -791,7 +804,7 @@ function FAQ() {
     },
     {
       q: "Y a-t-il une application mobile ?",
-      a: "SchoolFlow-GN est une application web responsive — elle fonctionne parfaitement sur téléphone, tablette et ordinateur sans rien installer. Une application Android native est en développement pour 2025.",
+      a: "SchoolFlow est une application web responsive — elle fonctionne parfaitement sur téléphone, tablette et ordinateur sans rien installer. Une application Android native est en développement pour 2025.",
     },
     {
       q: "Que se passe-t-il quand notre plan gratuit arrive à la limite de 50 élèves ?",
@@ -863,7 +876,7 @@ function CTAFinal() {
         <div data-aos="zoom-in">
           <h2 className="cta-title">Prêt à digitaliser votre école ?</h2>
           <p className="cta-subtitle">
-            Rejoignez les 120+ établissements qui font confiance à SchoolFlow-GN.
+            Rejoignez les 120+ établissements qui font confiance à SchoolFlow.
             Démarrez gratuitement — aucune carte bancaire requise.
           </p>
           <div className="cta-buttons">
@@ -871,7 +884,7 @@ function CTAFinal() {
               Créer mon compte gratuitement
             </Link>
             <a
-              href={`https://wa.me/224623952011?text=Bonjour, je veux en savoir plus sur SchoolFlow-GN`}
+              href={`https://wa.me/224623952011?text=Bonjour, je veux en savoir plus sur SchoolFlow`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-whatsapp"
@@ -904,7 +917,7 @@ function Footer() {
                 height={52}
               />
               <div>
-                <p className="footer-logo-name">SchoolFlow-GN</p>
+                <p className="footer-logo-name">SchoolFlow</p>
                 <p className="footer-logo-sub">
                   Smart School Management Platform
                 </p>
@@ -987,11 +1000,33 @@ function Footer() {
 
         <div className="footer-bottom">
           <div className="footer-bottom-left">
-            <p>
-              {" "}
-              &copy; {new Date().getFullYear()} SchoolFlow-GN. Tous droits
-              réservés.
-            </p>
+            <p>© 2024 SchoolFlow. Tous droits réservés.</p>
+          </div>
+          <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+            <a
+              href="https://wa.me/224623952011?text=Bonjour, je veux en savoir plus sur SchoolFlow"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontSize: "13px",
+                color: "#22c55e",
+                fontWeight: "600",
+                textDecoration: "none",
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+              }}
+            >
+              <svg
+                width="14"
+                height="14"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              Nous contacter
+            </a>
           </div>
           <div className="footer-powered">
             <span>Propulsé par</span>
@@ -1047,6 +1082,7 @@ export default function LandingPage() {
         <CTAFinal />
         <Footer />
         <WhatsAppFloat />
+        <Chatbot />
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import { AppError, NotFoundError, getPagination, buildPaginationMeta } from '@/lib/api'
+import { getPlanByKey } from '@/lib/pricing'
 
 // ─── CLASSES ──────────────────────────────────────────────────────────────────
 
@@ -65,6 +66,21 @@ export async function getClass(tenantId, classId) {
 }
 
 export async function createClass(tenantId, data) {
+  // ── Quota enforcement ──────────────────────────────────────────────────────
+  const [classCount, subscription] = await Promise.all([
+    prisma.class.count({ where: { tenantId, isActive: true } }),
+    prisma.subscription.findFirst({ where: { tenantId, status: 'ACTIVE' }, orderBy: { createdAt: 'desc' } }),
+  ])
+  const plan  = getPlanByKey(subscription?.plan || 'FREE')
+  const limit = subscription?.maxClasses || plan.maxClasses
+  if (classCount >= limit) {
+    throw new AppError(
+      `Quota atteint — votre plan ${plan.label} est limité à ${limit} classes actives. Upgradez votre abonnement.`,
+      403
+    )
+  }
+  // ──────────────────────────────────────────────────────────────────────────
+
   const { name, level, section, academicYear, teacherId, capacity } = data
 
   // Check uniqueness
