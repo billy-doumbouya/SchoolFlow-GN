@@ -1,4 +1,8 @@
 "use client";
+
+// 🚀 REND LA ROUTE DYNAMIQUE : Empêche Vercel de crash au build en ignorant la compilation statique
+export const dynamic = "force-dynamic";
+
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -158,7 +162,7 @@ function StepPhone({ onSuccess }) {
         body: JSON.stringify({ phone }),
       });
       const json = await res.json();
-      if (!res.ok) throw new Error(json.error);
+      if (!res.ok) throw new Error(json.error || "Une erreur est survenue");
       onSuccess(phone);
     } catch (err) {
       setError(err.message);
@@ -200,22 +204,7 @@ function StepPhone({ onSuccess }) {
         </p>
       </div>
 
-      {error && (
-        <div
-          style={{
-            background: "rgba(239,68,68,0.1)",
-            border: "1px solid rgba(239,68,68,0.3)",
-            borderRadius: "10px",
-            padding: "10px 14px",
-            fontSize: "13px",
-            color: "#ef4444",
-          }}
-        >
-          {error}
-        </div>
-      )}
-
-      <Field label="Numéro WhatsApp" error={null}>
+      <Field label="Numéro WhatsApp" error={error}>
         <div style={{ position: "relative" }}>
           <span
             style={{
@@ -233,7 +222,7 @@ function StepPhone({ onSuccess }) {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="+224 6XX XXX XXX"
-            style={{ ...inputStyle(false), paddingLeft: "44px" }}
+            style={{ ...inputStyle(!!error), paddingLeft: "44px" }}
             onFocus={(e) => (e.target.style.borderColor = "#2b50f5")}
             onBlur={(e) =>
               (e.target.style.borderColor = "rgba(255,255,255,0.1)")
@@ -314,7 +303,6 @@ function StepOTP({ phone, onSuccess }) {
     setLoading(true);
     setError("");
     try {
-      // We verify on the reset step — here just proceed
       onSuccess(fullCode);
     } catch (err) {
       setError(err.message);
@@ -385,7 +373,6 @@ function StepOTP({ phone, onSuccess }) {
         </div>
       )}
 
-      {/* OTP inputs */}
       <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
         {code.map((digit, idx) => (
           <input
@@ -491,7 +478,8 @@ function StepNewPassword({ phone, code, onSuccess }) {
         body: JSON.stringify({ phone, code, newPassword: password }),
       });
       const json = await res.json();
-      if (!res.ok) throw new Error(json.error);
+      if (!res.ok)
+        throw new Error(json.error || "Erreur lors de la réinitialisation");
       onSuccess();
     } catch (err) {
       setError(err.message);
@@ -545,7 +533,7 @@ function StepNewPassword({ phone, code, onSuccess }) {
         </div>
       )}
 
-      <Field label="Nouveau mot de passe">
+      <Field label="Nouveau mot de passe" error={null}>
         <div style={{ position: "relative" }}>
           <input
             type={showPwd ? "text" : "password"}
@@ -578,7 +566,14 @@ function StepNewPassword({ phone, code, onSuccess }) {
         </div>
       </Field>
 
-      <Field label="Confirmer le mot de passe">
+      <Field
+        label="Confirmer le mot de passe"
+        error={
+          confirm && confirm !== password
+            ? "Les mots de passe ne correspondent pas"
+            : null
+        }
+      >
         <input
           type={showPwd ? "text" : "password"}
           value={confirm}
@@ -588,14 +583,8 @@ function StepNewPassword({ phone, code, onSuccess }) {
           onFocus={(e) => (e.target.style.borderColor = "#2b50f5")}
           onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
         />
-        {confirm && confirm !== password && (
-          <p style={{ margin: 0, fontSize: "12px", color: "#ef4444" }}>
-            Les mots de passe ne correspondent pas
-          </p>
-        )}
       </Field>
 
-      {/* Strength indicator */}
       {password && (
         <div>
           <div style={{ display: "flex", gap: "4px", marginBottom: "4px" }}>
@@ -725,7 +714,7 @@ function Spinner() {
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 export default function ForgotPasswordPage() {
-  const [step, setStep] = useState(0); // 0=phone, 1=otp, 2=new password, 3=success
+  const [step, setStep] = useState(0);
   const [phone, setPhone] = useState("");
   const [code, setCode] = useState("");
 
