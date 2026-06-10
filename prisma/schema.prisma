@@ -111,20 +111,20 @@ enum Gender {
 // TEACHER
 // ─────────────────────────────────────────────
 model Teacher {
-  id           String   @id @default(cuid())
-  tenantId     String
-  userId       String   @unique
-  teacherCode  String
-  qualification String?
+  id             String   @id @default(cuid())
+  tenantId       String
+  userId         String   @unique
+  teacherCode    String
+  qualification  String?
   specialization String?
-  hireDate     DateTime @default(now())
-  isActive     Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  hireDate       DateTime @default(now())
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
-  tenant        Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  classes       Class[]
+  tenant          Tenant           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  classes         Class[]
   subjectTeachers SubjectTeacher[]
 
   @@unique([tenantId, teacherCode])
@@ -135,17 +135,17 @@ model Teacher {
 // CLASS
 // ─────────────────────────────────────────────
 model Class {
-  id          String   @id @default(cuid())
-  tenantId    String
-  name        String
-  level       String
-  section     String?
+  id           String   @id @default(cuid())
+  tenantId     String
+  name         String
+  level        String
+  section      String?
   academicYear String
-  teacherId   String?
-  capacity    Int      @default(30)
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  teacherId    String?
+  capacity     Int      @default(30)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   tenant      Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   teacher     Teacher?     @relation(fields: [teacherId], references: [id])
@@ -316,28 +316,31 @@ enum SubscriptionStatus {
 }
 
 // ─────────────────────────────────────────────
-// PAYMENT (GuinePay transactions)
+// PAYMENT (Djomy transactions)
 // ─────────────────────────────────────────────
 model Payment {
-  id                String        @id @default(cuid())
-  tenantId          String
-  studentId         String?
-  subscriptionId    String?
-  guinePayRef       String?       @unique
-  guinePayIntentId  String?       @unique
-  amount            Float
-  currency          String        @default("GNF")
-  status            PaymentStatus @default(PENDING)
-  paymentType       PaymentType   @default(SCHOOL_FEE)
-  description       String?
-  metadata          Json?
-  webhookReceived   Boolean       @default(false)
-  webhookReceivedAt DateTime?
-  paidAt            DateTime?
-  failureReason     String?
-  idempotencyKey    String        @unique
-  createdAt         DateTime      @default(now())
-  updatedAt         DateTime      @updatedAt
+  id                 String        @id @default(cuid())
+  tenantId           String
+  studentId          String?
+  subscriptionId     String?
+
+  // ── Djomy (remplace guinePayIntentId / guinePayRef) ──────────────────────
+  djomyTransactionId String?       @unique  // transactionId retourné par create_payment_gateway
+  djomyRef           String?       @unique  // référence finale fournie dans webhook / verify_payment
+
+  amount             Float
+  currency           String        @default("GNF")
+  status             PaymentStatus @default(PENDING)
+  paymentType        PaymentType   @default(SCHOOL_FEE)
+  description        String?
+  metadata           Json?
+  webhookReceived    Boolean       @default(false)
+  webhookReceivedAt  DateTime?
+  paidAt             DateTime?
+  failureReason      String?
+  idempotencyKey     String?       @unique  // optionnel — Djomy ne l'exige pas
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
 
   tenant       Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   student      Student?      @relation(fields: [studentId], references: [id])
@@ -345,7 +348,8 @@ model Payment {
 
   @@index([tenantId])
   @@index([tenantId, status])
-  @@index([guinePayRef])
+  @@index([djomyTransactionId])
+  @@index([djomyRef])
 }
 
 enum PaymentStatus {
